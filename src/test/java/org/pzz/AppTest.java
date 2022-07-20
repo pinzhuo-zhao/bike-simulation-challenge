@@ -3,7 +3,8 @@ package org.pzz;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.pzz.simulation.Direction;
+import org.pzz.entity.Direction;
+import org.pzz.entity.Position;
 
 /**
  * Unit test for simple App.
@@ -33,13 +34,9 @@ public class AppTest
 
     @Test
     public void DirectionTest2() {
-        Direction direction = Direction.WEST.nextRightDirection();
-        System.out.println(direction);
+        Position pos = new Position(5,3);
+        System.out.println(pos);
     }
 
-    @Test
-    public void DirectionTest3() {
-        Direction direction = Direction.WEST.nextRightDirection();
-        System.out.println(direction.name());
-    }
+
 }

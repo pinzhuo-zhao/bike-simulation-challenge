@@ -1,52 +1,54 @@
-package utils;
+package org.pzz.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @program: bike-simulation-challenge
- * @description:
- * @author: Pinzhuo Zhao, StudentID:1043915
+ * @description: A standardized result format in this program
+ * @author: Pinzhuo Zhao
  * @create: 2022-07-19 15:25
  **/
 public class Result {
     private Boolean success;
-
-    private Integer code;
-
-    private String message;
-
+    /**
+     * Return code of the result,
+     * not used in this program, but could be useful if the program is extended
+     */
+    private int code;
+    /**
+     * Storing result data in a map
+     */
     private Map<String, Object> data = new HashMap<>();
 
     private static final int DEFAULT_SUCCESS_CODE = 200;
     private static final int DEFAULT_ERROR_CODE = 400;
 
-    private Result() {
 
-    }
-
-    public Result message(String message){
-        this.setMessage(message);
-        return this;
-    }
-
-    public Result code(Integer code){
+    public Result code(int code){
         this.setCode(code);
         return this;
     }
 
+    /**
+     * Load data needs to be returned into the Result object
+     * @param key
+     * @param value
+     * @return
+     */
     public Result data(String key, Object value){
         this.data.put(key, value);
         return this;
     }
+
 
     public static Result ok() {
         Result r = new Result();
         r.setSuccess(true);
         String successCode = PropertiesUtil.getProperties("config",
                 "simulation.successCode");
+        //if success code is not specified in the properties file, use the default success code
         r.code((successCode != null ? Integer.parseInt(successCode) : DEFAULT_SUCCESS_CODE));
-        r.setMessage("success");
         return r;
     }
 
@@ -55,9 +57,16 @@ public class Result {
         r.setSuccess(false);
         String errorCode =  PropertiesUtil.getProperties("config",
                 "simulation.errorCode");
+        //if error code is not specified in the properties file, use the default error code
         r.code((errorCode != null ? Integer.parseInt(errorCode) : DEFAULT_ERROR_CODE));
-        r.setMessage("error");
         return r;
+    }
+
+    /**
+     * Constructors and Setters
+     */
+    private Result() {
+
     }
 
     public void setSuccess(Boolean success) {
@@ -66,10 +75,6 @@ public class Result {
 
     public void setCode(Integer code) {
         this.code = code;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public void setData(Map<String, Object> data) {
@@ -82,10 +87,6 @@ public class Result {
 
     public Integer getCode() {
         return code;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public Map<String, Object> getData() {

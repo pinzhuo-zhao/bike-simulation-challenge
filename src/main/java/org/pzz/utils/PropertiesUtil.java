@@ -1,4 +1,4 @@
-package utils;
+package org.pzz.utils;
 
 import java.util.ResourceBundle;
 
