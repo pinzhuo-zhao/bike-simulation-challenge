@@ -1,8 +1,7 @@
 package org.pzz;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.pzz.cli.Command;
+import org.pzz.entity.Command;
 
 import static org.junit.Assert.*;
 

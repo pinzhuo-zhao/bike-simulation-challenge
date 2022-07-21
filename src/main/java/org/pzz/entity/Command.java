@@ -1,4 +1,4 @@
-package org.pzz.cli;
+package org.pzz.entity;
 import java.util.Objects;
 
 /**

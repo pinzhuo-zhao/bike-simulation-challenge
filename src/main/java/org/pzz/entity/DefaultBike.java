@@ -1,6 +1,5 @@
 package org.pzz.entity;
 
-import org.pzz.cli.Command;
 import org.pzz.utils.Result;
 
 /**

@@ -2,7 +2,7 @@ package org.pzz;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.pzz.cli.Command;
+import org.pzz.entity.Command;
 import org.pzz.cli.Simulator;
 import org.pzz.entity.*;
 import org.pzz.utils.Result;
