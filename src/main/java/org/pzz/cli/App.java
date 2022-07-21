@@ -9,7 +9,6 @@ import org.pzz.utils.PropertiesUtil;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Entrance of the program
@@ -22,7 +21,7 @@ public class App {
 
     public static void main(String[] args) throws FileNotFoundException {
         //Reading the command file from the input path
-        String filePath = "/Users/charlespinzhuozhao/Desktop/sample.txt";
+        String filePath = args[0];
         File file = new File(filePath);
         if (!FileParsingUtils.isFileValid(file)) {
             throw new FileNotFoundException("Empty File");

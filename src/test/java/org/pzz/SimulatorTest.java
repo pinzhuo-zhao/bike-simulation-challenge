@@ -215,7 +215,7 @@ public class SimulatorTest {
         assertEquals(position,new Position(xCoordinate,yCoordinate - 1));
         assertEquals(direction, initialDirection);
     }
-    
+
     @Test
     public void testExecuteCommand_Forward_SoutheastCorner_OnPoint2() throws IOException {
         yCoordinate = 0;
