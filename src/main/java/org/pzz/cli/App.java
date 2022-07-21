@@ -17,6 +17,9 @@ import java.util.Objects;
  * @author Pinzhuo Zhao
  */
 public class App {
+    private static final int DEFAULT_GRID_LENGTH = 7;
+    private static final int DEFAULT_GRID_WIDTH = 7;
+
     public static void main(String[] args) throws FileNotFoundException {
         //Reading the command file from the input path
         String filePath = "/Users/charlespinzhuozhao/Desktop/sample.txt";
@@ -25,8 +28,11 @@ public class App {
             throw new FileNotFoundException("Empty File");
         }
         //set the grid's length and width based on user inputs from the properties file
-        int width = Integer.parseInt(Objects.requireNonNull(PropertiesUtil.getProperties("config", "simulation.grid.width")));
-        int length = Integer.parseInt(Objects.requireNonNull(PropertiesUtil.getProperties("config", "simulation.grid.length")));
+        String lengthStr = PropertiesUtil.getProperties("config", "simulation.grid.length");
+        String widthStr = PropertiesUtil.getProperties("config", "simulation.grid.width");
+        //set the grid's length width to default value is no user input specified
+        int width = widthStr == null ? DEFAULT_GRID_WIDTH : Integer.parseInt(widthStr);
+        int length = lengthStr == null ? DEFAULT_GRID_LENGTH : Integer.parseInt(lengthStr);
         Grid grid = new Grid(length, width);
         Bike bike = new DefaultBike();
         Simulator simulator = new Simulator(file,grid,bike);

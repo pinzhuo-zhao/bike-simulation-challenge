@@ -1,6 +1,7 @@
 package org.pzz.entity;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 /**
  * @program: bike-simulation-challenge
@@ -41,7 +42,7 @@ public class Position {
                 newPosition.xCoordinate--;
                 break;
             default:
-                break;
+                return null;
         }
         return newPosition;
     }
@@ -76,5 +77,18 @@ public class Position {
         String coordinate = "({0},{1})";
         return MessageFormat.format(coordinate,xCoordinate,yCoordinate);
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
+        Position position = (Position) o;
+        return xCoordinate == position.xCoordinate && yCoordinate == position.yCoordinate;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xCoordinate, yCoordinate);
     }
 }

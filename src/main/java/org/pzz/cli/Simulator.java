@@ -38,10 +38,9 @@ public class Simulator {
     /**
      * Removing every command before a valid PLACE command is found
      * @param commandStrings
-     * @return
-     * @throws IOException
+     * @return The List of command Strings starting from the first valid PLACE
      */
-    public List<String> removeBeforePlacing(List<String> commandStrings) throws IOException{
+    public List<String> removeBeforePlacing(List<String> commandStrings) {
         System.out.println("-- Start removing every command before the first valid PLACE...");
         Iterator<String> iterator = commandStrings.iterator();
         while (iterator.hasNext()) {
@@ -90,7 +89,7 @@ public class Simulator {
      * @return
      * @throws IOException
      */
-    private Result executeCommand(String commandString) throws IOException {
+    public Result executeCommand(String commandString) throws IOException {
         String[] split = commandString.split(" ");
         Command command = Command.getCommand(split[0]);
         if (Objects.isNull(command)) {
@@ -104,6 +103,9 @@ public class Simulator {
                 return Result.error();
             }
             Result result = FileParsingUtils.parsePlaceCommand(commandString);
+            if (!result.getSuccess()) {
+                return result;
+            }
             Map<String, Object> data = result.getData();
             position = (Position) data.get("position");
             direction = (Direction) data.get("direction");
@@ -116,6 +118,8 @@ public class Simulator {
                 return Result.error();
             }
         }
+        Position reportPosition = null;
+        Direction reportDirection = null;
         //Making the bike perform different action based on the command
         switch (command) {
             case PLACE:
@@ -135,16 +139,16 @@ public class Simulator {
                 break;
             case GPS_REPORT:
                 Result result = bike.gpsReport();
-                Position reportPosition = (Position) result.getData().get("position");
-                Direction reportDirection = (Direction) result.getData().get("direction");
+                reportPosition = (Position) result.getData().get("position");
+                reportDirection = (Direction) result.getData().get("direction");
                 String output = MessageFormat.format("\n{0}, {1}", reportPosition, reportDirection);
                 System.out.println(output);
                 FileParsingUtils.writeToFile(inputFile, output);
                 break;
             default:
-
+                break;
         }
-        return Result.ok();
+        return Result.ok().data("position",reportPosition).data("direction",reportDirection);
     }
 
 

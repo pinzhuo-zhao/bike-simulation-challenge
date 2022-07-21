@@ -59,7 +59,7 @@ public class FileParsingUtils {
      * @throws IOException
      */
     public static void writeToFile(File file, String data) throws IOException {
-        BufferedWriter out =new BufferedWriter(new FileWriter(file,true));
+        BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
         out.write(data);
         out.flush();
         out.close();

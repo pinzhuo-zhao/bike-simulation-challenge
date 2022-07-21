@@ -85,7 +85,7 @@ public class Result {
         return success;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 

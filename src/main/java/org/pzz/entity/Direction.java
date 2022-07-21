@@ -12,6 +12,20 @@ public enum Direction {
     NORTH, EAST, SOUTH, WEST;
 
     /**
+     *
+     * @param string
+     * @return the Direction has the same value as the given String
+     */
+    public static Direction getDirection(String string) {
+        for (Direction direction : Direction.values()) {
+            if (direction.name().equals(string)) {
+                return direction;
+            }
+        }
+        return null;
+    }
+
+    /**
      * get the next heading direction after calling TURN_LEFT
      * @return
      */
@@ -30,19 +44,7 @@ public enum Direction {
         return index == directions.length - 1 ? directions[0] : directions[index + 1];
     }
 
-    /**
-     *
-     * @param string
-     * @return the Direction has the same value as the given String
-     */
-    public static Direction getDirection(String string) {
-        for (Direction direction : Direction.values()) {
-            if (direction.name().equals(string)) {
-                return direction;
-            }
-        }
-        return null;
-    }
+
 
 
 
